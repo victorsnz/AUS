@@ -1,0 +1,12 @@
+/* .container {
+  height: 83vh;
+  padding-top: 10%;
+  padding-bottom: 10%;
+} */
+
+.jumbotron {
+  height: 40vh;
+}
+.jumbotron > h1 {
+  text-align: center;
+}
