@@ -6,12 +6,12 @@ import "./App.css";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import NavigationBar from "./components/NavigationBar/NavigationBarComponent";
-import Home from "./components/Home/HomeComponent";
-import SuperHeroes from "./components/Superheroes/SuperheroesComponent";
-import SuperPowers from "./components/SuperPowers/SuperPowersComponent";
-import Misions from "./components/Misions/MisionsComponent";
-import Footer from "./components/Footer/FooterComponent";
+import NavigationBar from "./components/NavigationBarComponent";
+import Home from "./components/HomeComponent";
+import SuperHeroes from "./components/SuperheroesComponent";
+import SuperPowers from "./components/SuperPowersComponent";
+import Misions from "./components/MisionsComponent";
+import Footer from "./components/FooterComponent";
 
 function App() {
   return (
