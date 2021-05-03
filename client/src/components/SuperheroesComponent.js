@@ -1,24 +1,35 @@
-// import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 // import Axios from "axios";
 
 import Container from "react-bootstrap/Container";
 import Table from "react-bootstrap/Table";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
+import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
+
+import db from "../services/firebase";
+
 
 function Superheroes() {
 
-  const superheroes = [
-    { id: 1,  name: "Superman",           year: 1938, planet: "Krypton",  status: "Vivo" },
-    { id: 2,  name: "Batman",             year: 1939, planet: "",         status: "Vivo" },
-    { id: 3,  name: "Mujer Maravilla",    year: 1941, planet: "",         status: "Vivo" },
-    { id: 4,  name: "Flash",              year: 1956, planet: "",         status: "Vivo" },
-    { id: 5,  name: "Detective Marciano", year: 1955, planet: "Marte",    status: "Vivo" },
-    { id: 6,  name: "Robin",              year: 1940, planet: "",         status: "Vivo" },
-    { id: 7,  name: "Krypto",             year: 1955, planet: "Krypton",  status: "Vivo" },
-    { id: 8,  name: "Kid Flash",          year: 1960, planet: "",         status: "Vivo" },
-    { id: 9,  name: "Hombre Halcón",      year: 1961, planet: "Thanagar", status: "Vivo" },
-    { id: 10, name: "Mujer Halcón",       year: 1961, planet: "Thanagar", status: "Vivo" } 
-  ];
+  // const superheroes = [
+  //   { id: 1,  name: "Superman",           year: 1938, planet: "Krypton",  status: "Vivo" },
+  //   { id: 2,  name: "Batman",             year: 1939, planet: "",         status: "Vivo" },
+  //   { id: 3,  name: "Mujer Maravilla",    year: 1941, planet: "",         status: "Vivo" },
+  //   { id: 4,  name: "Flash",              year: 1956, planet: "",         status: "Vivo" },
+  //   { id: 5,  name: "Detective Marciano", year: 1955, planet: "Marte",    status: "Vivo" },
+  //   { id: 6,  name: "Robin",              year: 1940, planet: "",         status: "Vivo" },
+  //   { id: 7,  name: "Krypto",             year: 1955, planet: "Krypton",  status: "Vivo" },
+  //   { id: 8,  name: "Kid Flash",          year: 1960, planet: "",         status: "Vivo" },
+  //   { id: 9,  name: "Hombre Halcón",      year: 1961, planet: "Thanagar", status: "Vivo" },
+  //   { id: 10, name: "Mujer Halcón",       year: 1961, planet: "Thanagar", status: "Vivo" } 
+  // ];
+
+    const [superheroes, setSuperheroes] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    const ref = db.collection("superheroes");
 
   // const [name, setName] = useState("");
   // const [year, setYear] = useState(0);
@@ -31,14 +42,17 @@ function Superheroes() {
   // const [newStatusID, setNewStatusID] = useState(0);
 
 
-
-  // const [superheroeList, setSuperheroeList] = useState([]);
-
-  // const getSuperheroes = () => {
-  //   Axios.get("http://localhost:3001/superheroes").then((response) => {
-  //     setSuperheroeList(response.data);
-  //   });
-  // };
+  function getSuperheroes() {
+    setLoading(true);
+    ref.onSnapshot((querySnapshot) => {
+      const items = [];
+      querySnapshot.forEach((doc) => {
+        items.push(doc.data());
+      });
+      setSuperheroes(items);
+      setLoading(false);
+    });
+  }
 
   // const addSuperheroe = () => {
   //   Axios.post("http://localhost:3001/create", {
@@ -93,30 +107,65 @@ function Superheroes() {
   //   });
   // };
 
-  const renderSuperheroes = (superheroes, index) => {
+  useEffect(() => {
+    getSuperheroes();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  if (loading) {
     return (
-      <tr key={index}>
-        <td>{superheroes.name}</td>
-        <td>{superheroes.year}</td>
-        <td>{superheroes.planet}</td>
-        <td>{superheroes.status}</td>
-      </tr>
+      <Container>
+        <h2>Loading data... ⌛</h2>
+      </Container>
     );
   }
+
+  const renderSuperheroes = superheroes.map((superheroe, index) => {
+    return (
+      <tr key={index}>
+        <td className="col-style">{superheroe.name}</td>
+        <td className="col-style">{superheroe.year}</td>
+        <td className="col-style">{superheroe.planet}</td>
+        <td className="col-style">{superheroe.status}</td>
+        <td style={{ textAlign: "center" }}>
+          <ButtonGroup aria-label="option">
+            <Button variant="primary">
+              <Link to={"/heroe-sheet"}>
+                <i className="material-icons">
+                  <span className="material-icons btn-icon-color">
+                    portrait
+                  </span>
+                </i>
+              </Link>
+            </Button>
+            <Button variant="warning">
+              <i className="material-icons">
+                <span className="material-icons btn-icon-color">mode_edit</span>
+              </i>
+            </Button>
+            <Button variant="danger">
+              <span className="material-icons btn-icon-color">delete</span>
+            </Button>
+          </ButtonGroup>
+        </td>
+      </tr>
+    );
+  });
 
   return (
     <Container>
       <h3>Superhéroes</h3>
-      <Table bordered hover size="sm">
+      <Table bordered size="sm">
         <thead>
           <tr>
-            <th>Nombre</th>
-            <th>Año</th>
-            <th>Planeta</th>
-            <th>Estado</th>
+            <th className="col-style">Nombre</th>
+            <th className="col-style">Año</th>
+            <th className="col-style">Planeta</th>
+            <th className="col-style">Estado</th>
+            <th style={{ textAlign: "center" }}>Opciones</th>
           </tr>
         </thead>
-        <tbody>{superheroes.map(renderSuperheroes)}</tbody>
+        <tbody>{renderSuperheroes}</tbody>
       </Table>
     </Container>
   );
