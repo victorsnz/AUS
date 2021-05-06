@@ -1,6 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
 
+//todo: usar .env para guardar las credentials
 const firebaseConfig = {
   apiKey: "AIzaSyAbIVfOo4GLANiVuz3ltCqd5IKdxuwGw3Q",
   authDomain: "superheroes-5477e.firebaseapp.com",
