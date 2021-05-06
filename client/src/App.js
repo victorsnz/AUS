@@ -1,17 +1,18 @@
 import React from "react";
 
-import "bootstrap/dist/css/bootstrap.min.css";
-
+// import "bootstrap/dist/css/bootstrap.min.css";
+import "bootswatch/dist/materia/bootstrap.min.css";
 import "./App.css";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import NavigationBar from "./components/NavigationBarComponent";
 import Home from "./components/HomeComponent";
-import SuperHeroes from "./components/SuperheroesComponent";
-import SuperPowers from "./components/SuperPowersComponent";
-import Misions from "./components/MisionsComponent";
+import SuperHeroes from "./components/Superheroes/SuperheroesComponent";
+import SuperPowers from "./components/SuperPowers/SuperPowersComponent";
+import Misions from "./components/Misions/MisionsComponent";
 import Footer from "./components/FooterComponent";
+import HeroeSheet from './components/HeroeSheetComponent';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/superheroes" component={SuperHeroes} />
         <Route path="/superpoderes" component={SuperPowers} />
         <Route path="/misiones" component={Misions} />
+        <Route path="/heroe-sheet" component={HeroeSheet} />
       </Switch>
       <Footer />
     </Router>
