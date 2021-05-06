@@ -14,21 +14,15 @@ function NavigationBar() {
           </Link>
         </Navbar.Brand>
         <Nav className="mr-auto">
-          {/* <Nav.Link> */}
             <Link to={"/superheroes"} className={"bar-text"}>
               Heroes
             </Link>
-          {/* </Nav.Link> */}
-          {/* <Nav.Link> */}
             <Link to={"/superpoderes"} className={"bar-text"}>
               Poderes
             </Link>
-          {/* </Nav.Link> */}
-          {/* <Nav.Link> */}
             <Link to={"/misiones"} className={"bar-text"}>
               Misiones
             </Link>
-          {/* </Nav.Link> */}
         </Nav>
       </Navbar>
     </>
