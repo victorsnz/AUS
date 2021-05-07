@@ -61,12 +61,14 @@ function Misions() {
 
   //Función DELETE
   function onDelete(id) {
-    ref
-      .doc(id)
-      .delete()
-      .catch((err) => {
-        console.error(err);
-      });
+    if (window.confirm("¿Desea eliminar esta misión?")) { 
+      ref
+        .doc(id)
+        .delete()
+        .catch((err) => {
+          console.error(err);
+        });
+    }  
   }
 
   function saveMisionAndOpenModal(mision) {

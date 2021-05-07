@@ -12,7 +12,6 @@ import SuperHeroes from "./components/Superheroes/SuperheroesComponent";
 import SuperPowers from "./components/SuperPowers/SuperPowersComponent";
 import Misions from "./components/Misions/MisionsComponent";
 import Footer from "./components/FooterComponent";
-import HeroeSheet from './components/HeroeSheetComponent';
 
 function App() {
   return (
@@ -23,7 +22,6 @@ function App() {
         <Route path="/superheroes" component={SuperHeroes} />
         <Route path="/superpoderes" component={SuperPowers} />
         <Route path="/misiones" component={Misions} />
-        <Route path="/heroe-sheet" component={HeroeSheet} />
       </Switch>
       <Footer />
     </Router>

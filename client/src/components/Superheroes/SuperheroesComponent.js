@@ -8,8 +8,6 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
-import { Link } from "react-router-dom";
-
 import AddHeroForm from "./AddHeroFormComponent";
 import EditHeroForm from './EditHeroFormComponent';
 
@@ -100,14 +98,6 @@ const Superheroes = () => {
         <td>{superhero.status}</td>
         <td style={{ textAlign: "center" }}>
           <ButtonGroup aria-label="option">
-            <Button
-              className="btn-option btn-sm shadow-none"
-              variant="outline-primary"
-            >
-              <Link to={"/heroe-sheet"}>
-                <span className="material-icons">portrait</span>
-              </Link>
-            </Button>
             <Button
               className="btn-option btn-sm shadow-none"
               variant="outline-warning"
