@@ -12,15 +12,12 @@ const EditMisionForm = ({ open, close, mision}) => {
   //Colección de firebase
   const ref = db.collection("misions");
 
-  const [description, setDescription] = useState(mision.description);
-  const [type, setType] = useState(mision.type);
-  
-  // const saveDescription = (newDescription) => setDescription(newDescription); 
-  // const saveType = (newType) => setType(newType); 
+  const [description, setDescription] = useState("");
+  const [type, setType] = useState(""); 
   
   // Función EDIT
   function onEdit(e, mision, updatedMision) {
-    // setLoading();
+
     ref
     .doc(mision.id)
     .update(updatedMision)
@@ -28,8 +25,6 @@ const EditMisionForm = ({ open, close, mision}) => {
       console.error(err);
     });
     
-    // e.stopPropagation();
-    // e.nativeEvent.stopImmediatePropagation();
     e.preventDefault();
     close();
   }
@@ -46,8 +41,8 @@ const EditMisionForm = ({ open, close, mision}) => {
             <Form.Control
               size="md"
               type="text"
-              placeholder="Ingrese Nueva Descripción"
               name="description"
+              value={mision.description}
               onChange={(e) => setDescription(e.target.value)}
             />
           </Form.Group>
@@ -56,8 +51,8 @@ const EditMisionForm = ({ open, close, mision}) => {
             <Form.Control
               size="md"
               type="text"
-              placeholder="Ingrese nuevo tipo"
               name="type"
+              value={mision.type}
               onChange={(e) => setType(e.target.value)}
             />
           </Form.Group>

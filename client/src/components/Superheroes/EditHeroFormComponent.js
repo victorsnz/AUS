@@ -12,10 +12,10 @@ const EditHeroForm = ({ open, close, superhero}) => {
   //Colección de firebase
   const ref = db.collection("superheroes");
 
-  const [name, setName] = useState(superhero.name);
-  const [year, setYear] = useState(superhero.year);
-  const [planet, setPlanet] = useState(superhero.planet);
-  const [status, setStatus] = useState(superhero.status);
+  const [name, setName] = useState("");
+  const [year, setYear] = useState("");
+  const [planet, setPlanet] = useState("");
+  const [status, setStatus] = useState("");
 
   // const saveName = (newName) => setName(newName); 
   // const saveYear = (newYear) => setYear(newYear); 
@@ -32,8 +32,6 @@ const EditHeroForm = ({ open, close, superhero}) => {
       console.error(err);
     });
     
-    // e.stopPropagation();
-    // e.nativeEvent.stopImmediatePropagation();
     e.preventDefault();
     close();
   }
@@ -50,8 +48,9 @@ const EditHeroForm = ({ open, close, superhero}) => {
             <Form.Control
               size="md"
               type="text"
-              placeholder="Ingrese Nombre"
+              // placeholder="Ingrese Nombre"
               name="name"
+              value={superhero.name}
               onChange={(e) => setName(e.target.value)}
             />
           </Form.Group>
@@ -60,8 +59,9 @@ const EditHeroForm = ({ open, close, superhero}) => {
             <Form.Control
               size="md"
               type="text"
-              placeholder="Ingrese Año"
+              // placeholder="Ingrese Año"
               name="year"
+              value={superhero.year}
               onChange={(e) => setYear(e.target.value)}
             />
           </Form.Group>
@@ -70,8 +70,9 @@ const EditHeroForm = ({ open, close, superhero}) => {
             <Form.Control
               size="md"
               type="text"
-              placeholder="Ingrese planeta de origen"
+              // placeholder="Ingrese planeta de origen"
               name="planet"
+              value={superhero.planet}
               onChange={(e) => setPlanet(e.target.value)}
             />
           </Form.Group>
@@ -80,8 +81,9 @@ const EditHeroForm = ({ open, close, superhero}) => {
             <Form.Control
               size="md"
               type="text"
-              placeholder="Ingrese el estado del superheroe"
+              // placeholder="Ingrese el estado del superheroe"
               name="status"
+              value={superhero.status}
               onChange={(e) => setStatus(e.target.value)}
             />
           </Form.Group>
